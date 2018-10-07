@@ -10,29 +10,29 @@
 using namespace std;
 using namespace Eigen;
 
-class CTM { //Coordinate Transformation Matrix
+class ERM { //Equivalent Rotation Matrix
     private:
         double degree;
         double th;
         Matrix4d T;
         Vector3d k;
     public:
-        CTM(double degree);
+        ERM(double degree);
         void set_vector();
         void set_and_get_matrix();
 };
 
-CTM::CTM(double degree) {
+ERM::ERM(double degree) {
     this->degree = degree;
 }
 
-void CTM::set_vector() {
+void ERM::set_vector() {
     k << 0.707,
          0.707,
          0;
 }
 
-void CTM::set_and_get_matrix() { //原点の並進は行わない
+void ERM::set_and_get_matrix() { //原点の並進は行わない
     double th = degree*M_PI/180.0;
     T << pow(k[0], 2)*(1-cos(th))+cos(th), k[0]*k[1]*(1-cos(th))-k[2]*sin(th), k[0]*k[2]*(1-cos(th))+k[1]*sin(th),0,
          k[0]*k[1]*(1-cos(th))+k[2]*sin(th), pow(k[1], 2)*(1-cos(th))+cos(th), k[1]*k[2]*(1-cos(th))-k[0]*sin(th),0,
@@ -48,9 +48,9 @@ int main() {
 
     cout << "角度を設定してください. >> "; cin >> degree;
 
-    CTM ctm(degree);
-    ctm.set_vector();
-    ctm.set_and_get_matrix();
+    ERM erm(degree);
+    erm.set_vector();
+    erm.set_and_get_matrix();
 
     return 0;
 }
