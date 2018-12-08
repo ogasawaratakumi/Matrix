@@ -6,9 +6,7 @@ using namespace Eigen;
 
 class Jacobi {
     private:
-        static const double L1 = 1.0;
-        static const double L2 = 1.0;
-        static const double L3 = 1.0;
+        double L1, L2, L3;
         double deg1, deg2, deg3;
         Vector3d q;
         Vector3d new_q;
@@ -19,6 +17,8 @@ class Jacobi {
         Matrix<double,2,2> J_calcin;
         Matrix<double,3,2> J_inverse;
     public:
+        Jacobi() :
+            L1(1.0), L2(1.0), L3(1.0) {}
         void set_matrix();
         void analyze();
 };
@@ -28,8 +28,8 @@ void Jacobi::set_matrix() {
          M_PI/2.0,
          M_PI/4.0;
 
-    goal << 3.0,
-            0.0;
+    goal << 2.0,
+            0.5;
 }
 
 void Jacobi::analyze() {
@@ -62,5 +62,3 @@ int main() {
 
     return 0;
 }
-
-        
